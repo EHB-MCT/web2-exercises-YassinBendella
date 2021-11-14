@@ -4,22 +4,53 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    <title>DAGGOE</title>
 </head>
 <body>
-    <form >
-        <select id="height">
-            <option value="small">small</option>
-            <option value="medium">medium</option>
-            <option value="large">large</option>
-        </select>
-
-    </form>
-
-    <div id="breeds">
-
+    <div class="container">
+        <div id="step1" class="step">
+            <div>
+                <p>Welke grootte hond verkiest u ?</p>
+                <div class="buttons">
+                    <button class="btn">Small</button>
+                    <button class="btn">Medium</button>
+                    <button class="btn">Large</button>
+                </div>
+            </div>
+            <button class="btn-skip">
+                skip
+            </button>
+        </div>
+        <div id="step2" class="step">
+            <div>
+                <p>Wat voor eerste eigenschap heeft uw hond ?</p>
+                <div class="buttons">
+                    <button class="btn">Playful</button>
+                    <button class="btn">Brave</button>
+                    <button class="btn">Loyal</button>
+                </div>
+                <div class="buttons">
+                    <button class="btn">Leader</button>
+                    <button class="btn">Courageous</button>
+                    <button class="btn">Selfish</button>
+                </div>
+                <div class="buttons">
+                    <button class="btn">Friendly</button>
+                    <button class="btn">Affectionate</button>
+                    <button class="btn">Jealousy</button>
+                </div>
+            </div>
+            <button class="btn-skip">
+                skip
+            </button>
+        </div>
     </div>
-
+    <footer class="footer">
+        <p>DAGGOE</p>
+    </footer>
     <script src="script.js"></script>
+    <script src="pages.js"></script>
 </body>
 </html>

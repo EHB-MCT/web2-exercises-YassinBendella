@@ -1,6 +1,3 @@
-let select = document.getElementById("height")
-select.onchange = load;
-
 function parseHeight(height){
     // https://www.w3schools.com/jsref/jsref_split.asp
     let heights = height.split(" - ")

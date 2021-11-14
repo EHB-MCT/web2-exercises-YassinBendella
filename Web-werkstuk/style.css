@@ -1,0 +1,75 @@
+@font-face {
+    font-family: "richard";
+    src: url("./fonts/PoorRichardOpti.otf");
+}
+
+html{
+    font-family: "richard", serif;
+}
+
+.container{
+    width: 100vw;
+    height: 90vh;
+    background-color: #ddd;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.step{
+    width: 50%;
+    height: 50%;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.step > div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttons{
+    margin-top: 5vh;
+    display: flex;
+    gap: 1vw;
+}
+
+.btn{
+    border:1px solid #000;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 25px;
+    min-width: 5vw;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+.btn-skip{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    margin: 1vh;
+    font-size: large;
+}
+
+.btn-skip:hover{
+    font-size: x-large;
+    transition: 150ms ease-in-out;
+}
+
+.footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+}
+
+.footer > p{
+    font-size: xx-large;
+}
