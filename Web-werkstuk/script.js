@@ -1,5 +1,42 @@
+let buttons = document.getElementsByClassName("btn")
+let previousButton = document.getElementsByClassName("btn-previous")
+for (var button of buttons){
+    button.onclick = buttonClick
+}
+for (var button of previousButton){
+    button.onclick = previousPage
+}
+let dogOptions = 
+{
+    size: {
+        min: 0,
+        max: Infinity
+    },
+    properties: []
+}
+
+
+function buttonClick(e){
+    let btnText = e.target.innerText
+    if (currentPageIndex == 1){
+        if (btnText === "Small"){
+            dogOptions.size = {min: 0, max:40}
+        }
+        else if (btnText === "Medium"){
+            dogOptions.size = {min: 40, max:70}
+        }
+        else if (btnText === "Large"){
+            dogOptions.size = {min: 70, max:Infinity}
+        }
+    }
+    else {
+        dogOptions.properties.push(btnText)
+    }
+    console.log(dogOptions)
+    nextPage()
+}
+
 function parseHeight(height){
-    // https://www.w3schools.com/jsref/jsref_split.asp
     let heights = height.split(" - ")
     if (heights.length == 2){
         return {min: parseInt(heights[0]), max: parseInt(heights[1]) }
@@ -7,34 +44,12 @@ function parseHeight(height){
     else{
         return {min: parseInt(heights[0]), max: parseInt(heights[0])}
     }
-    
-}
-
-function getSelectedHeight(){
-    let selectedheight = select.options[select.selectedIndex].value
-    return selectedheight
 }
 
 async function load(){
-    clearHtml()
     let response = await sendRequest()
     let height = getSelectedHeight()
     let filteredBreeds = []
-    for (let breed of response){
-        let breedHeight = parseHeight(breed.height.metric)
-        if (height === "small" && breedHeight.max <= 40){
-            filteredBreeds.push(breed)
-        }
-        else if (height === "medium" && breedHeight.max <= 70 && breedHeight.min > 40){
-            filteredBreeds.push(breed)
-        }
-        else if (height === "large" && breedHeight.max > 70){
-            filteredBreeds.push(breed)
-        }
-    }
-    for (let breed of filteredBreeds){
-        html(breed)
-    }
 }
 
 async function sendRequest(){
@@ -48,27 +63,4 @@ async function sendRequest(){
         })
     let result = await response.json()
     return result
-}
-
-function html(breed){
-    let container = document.createElement("div")
-    let info = document.createElement("div")
-    let name = document.createElement("h3")
-    let height = document.createElement("p")
-
-    name.innerText = breed.name
-    height.innerText = breed.height.metric
-
-    info.appendChild(name)
-    info.appendChild(height)
-
-    container.appendChild(info)
-
-    let breeds = document.getElementById("breeds")
-    breeds.appendChild(container)
-}
-
-function clearHtml(){
-    let breeds = document.getElementById("breeds")
-    breeds.innerHTML = ""
 }
