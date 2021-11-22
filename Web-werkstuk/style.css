@@ -26,6 +26,43 @@ html{
     align-items: center;
 }
 
+#step4{
+    width: 75%;
+    height: 100%;
+    flex-direction: row;
+    margin: auto;
+}
+
+#bestfit{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5vh;
+}
+
+#bestfit>h1{
+    font-size: xx-large;
+}
+
+#bestfit h4{
+    font-size: x-large;
+}
+
+.flex-row{
+    flex-direction: row !important;
+}
+
+.subcontainer:nth-child(1){
+    flex-basis: 60%;
+}
+.subcontainer:nth-child(2){
+    flex-basis: 40%;
+}
+
+.scrollbar{
+    max-height: 60vh;
+    overflow-y: scroll;
+}
 .step > div{
     display: flex;
     flex-direction: column;

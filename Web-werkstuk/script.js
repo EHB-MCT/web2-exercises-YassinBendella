@@ -16,7 +16,7 @@ let dogOptions =
 }
 
 
-function buttonClick(e){
+async function buttonClick(e){
     let btnText = e.target.innerText
     if (currentPageIndex == 1){
         if (btnText === "Small"){
@@ -34,6 +34,9 @@ function buttonClick(e){
     }
     console.log(dogOptions)
     nextPage()
+    if (currentPageIndex == 4){
+        await load()
+    }
 }
 
 function parseHeight(height){
@@ -46,10 +49,17 @@ function parseHeight(height){
     }
 }
 
-async function load(){
-    let response = await sendRequest()
-    let height = getSelectedHeight()
-    let filteredBreeds = []
+async function load(dogOptions){
+    let response = await sendRequest(dogOptions)
+    // console.log(response)
+    filteredBreeds = response.filter(filterFunction)
+    if (filteredBreeds.length > 0){
+        console.log(filteredBreeds)
+        sortedBreeds = filteredBreeds.sort((a,b) => a.sortIndex - b.sortIndex)
+        bestFitbreed = sortedBreeds.shift()
+        bestFitHtml(bestFitbreed)
+        otherHtml(sortedBreeds)
+    }
 }
 
 async function sendRequest(){
@@ -63,4 +73,31 @@ async function sendRequest(){
         })
     let result = await response.json()
     return result
+}
+
+function filterFunction(breed){
+    let dogHeight = parseHeight(breed.height.metric)
+    if (dogHeight.min < dogOptions.size.min || dogHeight.max > dogOptions.size.max) return false
+    if (breed.temperament == undefined) return false
+    let characteristics = breed.temperament.split(",")
+    let intersection = dogOptions.properties.filter(p => characteristics.includes(p))
+    if (intersection.length == 0) return false
+    breed.sortIndex = intersection.length
+    return true
+}
+
+function bestFitHtml(breed){
+    let breedNameHTML = document.getElementById("breed-name")
+    let breedInfoHTML = document.getElementById("breed-info")
+    let breedImgHTML = document.getElementById("breed-img")
+    let breedHeight = parseHeight(breed.height.metric)
+    let characteristics = breed.temperament.split(",")
+    let intersection = dogOptions.properties.filter(p => characteristics.includes(p))
+    breedNameHTML.innerText = breed.name
+    breedInfoHTML.innerText = `${breedHeight.min}cm - ${breedHeight.max}cm / ${intersection.join(" / ")}`
+    breedImgHTML.src = breed.image.url
+}
+
+function otherHtml(breeds){
+
 }
