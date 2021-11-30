@@ -18,6 +18,8 @@ function nextPage(){
 
 function previousPage(){
     if (currentPageIndex == 1) return
+    let errorPage = document.getElementById("error")
+    if (errorPage != undefined) errorPage.style.display = "none"
     if (currentPageIndex > 0 && currentPageIndex <= totalPages){
         let currentId = `step${currentPageIndex}`
         let currentPage = document.getElementById(currentId)

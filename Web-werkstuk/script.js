@@ -1,11 +1,6 @@
-let buttons = document.getElementsByClassName("btn")
-let previousButton = document.getElementsByClassName("btn-previous")
-for (var button of buttons){
-    button.onclick = buttonClick
-}
-for (var button of previousButton){
-    button.onclick = previousPage
-}
+document.querySelectorAll(".btn-element").forEach(e => e.onclick = buttonClick)
+document.querySelectorAll(".btn-previous").forEach(e => e.onclick = previousPage)
+document.querySelectorAll(".btn-skip").forEach(e => e.onclick = nextPage)
 let dogOptions = 
 {
     size: {
@@ -14,7 +9,6 @@ let dogOptions =
     },
     properties: []
 }
-
 
 async function buttonClick(e){
     let btnText = e.target.innerText
@@ -29,7 +23,14 @@ async function buttonClick(e){
             dogOptions.size = {min: 70, max:Infinity}
         }
     }
-    else {
+    else if (currentPageIndex == 2){
+        if (dogOptions.properties.length > 0) dogOptions.properties = []
+        dogOptions.properties.push(btnText)
+    }
+    else if (currentPageIndex == 3){
+        if (dogOptions.properties.length > 1){
+            dogOptions.properties = dogOptions.properties.slice(1)
+        }
         dogOptions.properties.push(btnText)
     }
     console.log(dogOptions)
@@ -51,14 +52,17 @@ function parseHeight(height){
 
 async function load(dogOptions){
     let response = await sendRequest(dogOptions)
-    // console.log(response)
     filteredBreeds = response.filter(filterFunction)
+    console.log(filteredBreeds)
     if (filteredBreeds.length > 0){
         console.log(filteredBreeds)
         sortedBreeds = filteredBreeds.sort((a,b) => a.sortIndex - b.sortIndex)
         bestFitbreed = sortedBreeds.shift()
         bestFitHtml(bestFitbreed)
         otherHtml(sortedBreeds)
+    }
+    else{
+        createErrorPage()
     }
 }
 
@@ -99,5 +103,30 @@ function bestFitHtml(breed){
 }
 
 function otherHtml(breeds){
+    const container = document.getElementById("other")
+    container.innerHTML = ""
+    for (let breed of breeds){
+        let hond = hondHtml(breed)
+        hond.classList.add("other-dogs")
+        container.appendChild(hond)
+    }
+}
 
+function hondHtml(breed){
+    let container = document.createElement("div")
+    let img = document.createElement("img")
+    let nameHtml = document.createElement("p")
+    img.src = breed.image.url
+    img.height = 200
+    img.width = 200
+    nameHtml.innerText = breed.name
+    container.appendChild(img)
+    container.appendChild(nameHtml)
+    return container
+}
+
+function createErrorPage(){
+    document.getElementById("step4").style.display = "none"
+    let error = document.getElementById("error")
+    error.style.display = "flex"
 }

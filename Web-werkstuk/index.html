@@ -10,14 +10,14 @@
     <title>DAGGOE</title>
 </head>
 <body>
-    <div class="container">
+    <div id="main" class="container">
         <div id="step1" class="step">
             <div>
                 <p>Welke grootte hond verkiest u ?</p>
                 <div class="buttons">
-                    <button class="btn">Small</button>
-                    <button class="btn">Medium</button>
-                    <button class="btn">Large</button>
+                    <button class="btn btn-element">Small</button>
+                    <button class="btn btn-element">Medium</button>
+                    <button class="btn btn-element">Large</button>
                 </div>
             </div>
             <button class="btn-skip">
@@ -28,19 +28,19 @@
             <div>
                 <p>Wat voor eerste eigenschap heeft uw hond ?</p>
                 <div class="buttons">
-                    <button class="btn">Playful</button>
-                    <button class="btn">Brave</button>
-                    <button class="btn">Loyal</button>
+                    <button class="btn btn-element">Playful</button>
+                    <button class="btn btn-element">Brave</button>
+                    <button class="btn btn-element">Loyal</button>
                 </div>
                 <div class="buttons">
-                    <button class="btn">Leader</button>
-                    <button class="btn">Courageous</button>
-                    <button class="btn">Selfish</button>
+                    <button class="btn btn-element">Leader</button>
+                    <button class="btn btn-element">Courageous</button>
+                    <button class="btn btn-element">Selfish</button>
                 </div>
                 <div class="buttons">
-                    <button class="btn">Friendly</button>
-                    <button class="btn">Affectionate</button>
-                    <button class="btn">Jealousy</button>
+                    <button class="btn btn-element">Friendly</button>
+                    <button class="btn btn-element">Affectionate</button>
+                    <button class="btn btn-element">Jealousy</button>
                 </div>
             </div>
             <div class="buttons">
@@ -56,19 +56,19 @@
             <div>
                 <p>Wat voor tweede eigenschap heeft uw hond ?</p>
                 <div class="buttons">
-                    <button class="btn">Playful</button>
-                    <button class="btn">Brave</button>
-                    <button class="btn">Loyal</button>
+                    <button class="btn btn-element">Playful</button>
+                    <button class="btn btn-element">Brave</button>
+                    <button class="btn btn-element">Loyal</button>
                 </div>
                 <div class="buttons">
-                    <button class="btn">Leader</button>
-                    <button class="btn">Courageous</button>
-                    <button class="btn">Selfish</button>
+                    <button class="btn btn-element">Leader</button>
+                    <button class="btn btn-element">Courageous</button>
+                    <button class="btn btn-element">Selfish</button>
                 </div>
                 <div class="buttons">
-                    <button class="btn">Friendly</button>
-                    <button class="btn">Affectionate</button>
-                    <button class="btn">Jealousy</button>
+                    <button class="btn btn-element">Friendly</button>
+                    <button class="btn btn-element">Affectionate</button>
+                    <button class="btn btn-element">Jealousy</button>
                 </div>
             </div>
             <div class="buttons">
@@ -90,15 +90,23 @@
                         <p id="breed-info"></p>
                     </div>
                 </div>
-                <div>
-                    <button><i class="fas fa-save"></i></button>
+                <div id="buttons-best-fit">
+                    <button class="btn"><i class="fas fa-save"></i></button>
                     <button class="btn btn-previous"><i class="fas fa-undo"></i></button>
                 </div>
             </div>
             <div class="scrollbar subcontainer">
-                <h1>Nog meer honden:</h1>
-
+                <div id="content">
+                    <h1>Nog meer honden:</h1>
+                    <div id="other">
+    
+                    </div>
+                </div>
             </div>
+        </div>
+        <div id="error" class="error-div">
+            <p>Geen honden gevonden voor deze filter, probeer iets anders</p>
+            <button class="btn btn-previous"><i class="fas fa-undo"></i></button>
         </div>
     </div>
     <footer class="footer">
