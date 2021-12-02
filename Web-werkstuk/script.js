@@ -122,6 +122,7 @@ function hondHtml(breed){
     nameHtml.innerText = breed.name
     container.appendChild(img)
     container.appendChild(nameHtml)
+    container.onclick = () => {fillModal(breed)}
     return container
 }
 
@@ -130,3 +131,26 @@ function createErrorPage(){
     let error = document.getElementById("error")
     error.style.display = "flex"
 }
+
+function fillModal(breed){
+    const imageWidth = 250
+    console.log(breed)
+    let infoContainer = document.createElement("div")
+    let nameHtml = document.createElement("p")
+    nameHtml.innerText = breed.name
+    let image = document.createElement("img")
+    image.src = breed.image.url
+    image.width = imageWidth
+    image.heaght = (breed.image.height / breed.image.width) * imageWidth
+    let breedHeight = parseHeight(breed.height.metric)
+    let infoHtml = document.createElement("p")
+    let characteristics = breed.temperament.split(",")
+    let intersection = dogOptions.properties.filter(p => characteristics.includes(p))
+    infoHtml.innerText = `${breedHeight.min}cm - ${breedHeight.max}cm / ${intersection.join(" / ")}`
+    infoContainer.appendChild(image)
+    infoContainer.appendChild(nameHtml)
+    infoContainer.appendChild(infoHtml)
+    setModalContent(infoContainer)
+    showModal()
+}
+
