@@ -11,3 +11,7 @@ function hideModal(){
 function setModalContent(content){
     document.getElementById("modal-body").appendChild(content)
 }
+
+function clearModalContent(){
+    document.getElementById("modal-body").innerHTML = ""
+}

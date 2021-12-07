@@ -12,6 +12,8 @@ let dogOptions =
 
 async function buttonClick(e){
     let btnText = e.target.innerText
+    disableActiveButtons()
+    e.target.classList.add("btn-active")
     if (currentPageIndex == 1){
         if (btnText === "Small"){
             dogOptions.size = {min: 0, max:40}
@@ -23,20 +25,22 @@ async function buttonClick(e){
             dogOptions.size = {min: 70, max:Infinity}
         }
     }
+    else if (currentPageIndex == 2 || currentPageIndex == 3){
+        dogOptions.properties.push(btnText)
+    }
+    nextPage()
+    if (currentPageIndex == 4){
+        await load()
+    }
     else if (currentPageIndex == 2){
         if (dogOptions.properties.length > 0) dogOptions.properties = []
-        dogOptions.properties.push(btnText)
+        setCategories(categories)
     }
     else if (currentPageIndex == 3){
         if (dogOptions.properties.length > 1){
             dogOptions.properties = dogOptions.properties.slice(1)
         }
-        dogOptions.properties.push(btnText)
-    }
-    console.log(dogOptions)
-    nextPage()
-    if (currentPageIndex == 4){
-        await load()
+        setCategories(categories)
     }
 }
 
@@ -53,9 +57,7 @@ function parseHeight(height){
 async function load(dogOptions){
     let response = await sendRequest(dogOptions)
     filteredBreeds = response.filter(filterFunction)
-    console.log(filteredBreeds)
     if (filteredBreeds.length > 0){
-        console.log(filteredBreeds)
         sortedBreeds = filteredBreeds.sort((a,b) => a.sortIndex - b.sortIndex)
         bestFitbreed = sortedBreeds.shift()
         bestFitHtml(bestFitbreed)
@@ -150,6 +152,7 @@ function fillModal(breed){
     infoContainer.appendChild(image)
     infoContainer.appendChild(nameHtml)
     infoContainer.appendChild(infoHtml)
+    clearModalContent()
     setModalContent(infoContainer)
     showModal()
 }

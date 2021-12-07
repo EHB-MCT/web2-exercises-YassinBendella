@@ -32,3 +32,10 @@ function previousPage(){
         nextPage.style.display = "flex"
     }
 }
+
+function disableActiveButtons(){
+    let currentPage = document.getElementById(`step${currentPageIndex}`)
+    if (currentPage){
+        currentPage.querySelectorAll(".btn").forEach(e => e.classList.remove("btn-active"))
+    }
+}
